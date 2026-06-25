@@ -1,0 +1,802 @@
+/* =========================================
+   공통 요소 (폰트, 헤더, 푸터)
+========================================= */
+
+/* 기본 초기화 및 폰트 설정 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+h3, p {
+    margin: 0;
+}
+
+/* 상단 헤더 고정 및 스타일 */
+.main-header {
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 30px 20px 30px; 
+    display: flex;
+    justify-content: space-between; /* 🚨 이 줄이 로고와 메뉴를 양 끝으로 쫙 밀어줍니다! */
+    align-items: center;
+}
+
+/* 로고 디자인 */
+.logo-container {
+    display: flex;
+    align-items: center;
+    height: 100%; 
+    padding: 0;
+    margin-left: -23px; /* 로고를 왼쪽 박스 선에 맞추는 역할 */
+}
+
+.logo-container a {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    max-height: 115px; 
+    width: auto;      
+    display: block;   
+}
+
+/* 우측 네비게이션 메뉴 */
+
+
+.main-nav ul {
+    display: flex;
+    gap: 40px;
+}
+
+.main-nav a {
+    font-size: 16px;
+    color: #333;
+    transition: color 0.2s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    font-weight: 700;
+}
+
+/* =========================================
+   🛡️ 이미지 무단 저장 및 드래그 방지
+========================================= */
+img {
+    -webkit-touch-callout: none; /* 모바일(iOS/안드로이드)에서 꾹 누를 때 뜨는 메뉴 막기 */
+    user-select: none;           /* 이미지 선택(블록 지정) 막기 */
+    -webkit-user-drag: none;     /* 맥(Mac)이나 사파리에서 드래그하는 것 막기 */
+    pointer-events: none;        /* (선택사항) 이미지 클릭 자체를 완전 무효화 */
+}
+
+/* 💡 단, 로고 이미지나 상세페이지로 넘어가는 썸네일은 클릭이 되어야 하므로
+   pointer-events를 풀어줍니다! */
+a img {
+    pointer-events: auto; 
+}
+
+
+
+/* =========================================
+   메인 포트폴리오 화면 (index.html)
+========================================= */
+
+/* 메인 콘텐츠 영역 */
+.content-container {
+    max-width: 1200px;
+    margin: 240px auto 60px;
+    padding: 0 30px;
+}
+
+/* 💡 4단 그리드 레이아웃 (축소해도 깨지지 않게 꽉 채우기 복구!) */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 270px 고정을 지우고 무조건 1fr(비율)로 꽉 차게 원상복구! */
+    justify-content: space-between; /* 박스들을 양끝으로 시원하게 펼쳐줍니다 */
+    gap: 25px 20px;
+}
+
+/* 개별 포트폴리오 카드 */
+.portfolio-item {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 썸네일 이미지 박스 영역 */
+.item-image-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1.1; 
+    background-color: #edefee; /* 💡 목업 박스 배경색 적용! */
+    margin-bottom: 24px; 
+    overflow: hidden; 
+}
+
+/* 박스 안에 들어갈 실제 이미지 스타일 */
+.portfolio-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+    transition: transform 0.3s ease; 
+}
+
+.portfolio-item:hover .portfolio-image {
+    transform: scale(1.10);
+}
+
+/* 제목 및 태그 텍스트 */
+.item-title {
+    font-weight: 700;
+    font-size: 16px; 
+    color: #111;
+    line-height: 1.4;
+    margin-bottom: 4px; 
+    word-break: keep-all;
+}
+
+.item-tags {
+    font-size: 12px; 
+    color: #888;
+    font-weight: 400; 
+}
+
+/* 우측 하단 스크롤 버튼 */
+.floating-controls {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 999;
+}
+
+.scroll-btn {
+    width: 36px;
+    height: 36px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+}
+
+.scroll-btn:hover {
+    background-color: #ccc;
+}
+
+/* =========================================
+   추가된 하단 영역 (More 버튼 & Footer) 
+========================================= */
+
+/* ⬇️ More 버튼 완벽한 중앙 정렬 */
+.more-btn-container {
+    display: flex;            
+    justify-content: center;  
+    width: 100%;
+    margin-top: 100px; 
+    margin-bottom: 80px;
+}
+
+.more-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 10px 20px;
+    transition: opacity 0.2s ease;
+}
+
+.more-btn:hover {
+    opacity: 0.5; 
+}
+
+/* 푸터 (하단 회사 정보) 영역 */
+.main-footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 30px 100px 30px; 
+    border-top: 1px solid #111; 
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* 왼쪽 회사 정보 텍스트 */
+.footer-info p {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    word-break: keep-all;
+}
+
+.footer-info .company-name {
+    font-weight: 700;
+    color: #111;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.footer-info .divider {
+    margin: 0 6px;
+    color: #ccc;
+    font-size: 10px;
+}
+
+.footer-info .copyright {
+    margin-top: 5px;
+    color: #888;
+}
+
+/* 오른쪽 소셜 아이콘 및 로고 */
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-social a {
+    color: #111;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s;
+}
+
+.footer-social a:hover {
+    opacity: 0.5;
+}
+
+.footer-social .social-text {
+    font-size: 15px !important;
+    letter-spacing: -0.5px;
+}
+
+.yellow-circle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background-color: #ffd700;
+    border-radius: 50%;
+    margin: 0 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    line-height: 1;
+    padding-bottom: 2px;
+}
+
+/* =========================================
+   상세 페이지 (detail.html) 전용 스타일
+========================================= */
+
+/* 헤더에 가려지지 않게 위쪽 여백 주기 */
+.detail-container {
+    width: 100%;
+    margin-top: 200px; 
+    padding-bottom: 0;
+}
+
+/* 제목과 세부내용 중앙 정렬 */
+.detail-title-area {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.detail-title-area h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 12px;
+}
+
+.detail-title-area p {
+    font-size: 15px;
+    color: #666;
+}
+
+/* 목업이 들어가는 뼈대 영역 (배경색 제거) */
+.detail-content-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* 이미지를 세로로 쌓음 */
+    align-items: center;    /* 이미지를 한가운데 정렬 */
+    gap: 15px; /* 💡 목업 이미지와 이미지 사이의 흰색 간격입니다. 붙이고 싶으면 0으로 하세요! */
+    margin-bottom: 100px; /* 맨 아래 푸터(회사정보)와 겹치지 않게 여백 추가 */
+}
+
+/* 개별 목업 이미지가 들어갈 투명한 칸 */
+.detail-image {
+    width: 100%;
+    max-width: 1200px; /* 메인 화면의 그리드 넓이(1200px)와 똑같이 맞춰서 안정감 부여 */
+    display: flex;
+    justify-content: center;
+}
+
+/* 실제 목업 이미지가 칸에 꽉 차게 설정 */
+.detail-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* =========================================
+   ABOUT 페이지 (about.html)
+========================================= */
+
+/* 상단 2단 레이아웃 */
+.about-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+}
+
+.about-intro h2 { font-size: 20px; margin-bottom: 20px; }
+.about-intro h3 { font-size: 16px; margin-top: 30px; }
+.about-intro p { line-height: 1.6; color: #444; }
+
+/* 하단 5단 파트너 리스트 */
+.partner-list h3 { margin-bottom: 30px; }
+.partner-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.partner-grid ul { list-style: none; }
+.partner-grid li { 
+    font-size: 13px; 
+    margin-bottom: 8px; 
+    color: #666; 
+}
+.partner-grid li:first-child { 
+    font-weight: 700; 
+    color: #111; 
+    margin-bottom: 15px; 
+}
+
+.download-link {
+    display: inline-block;
+    margin-top: 20px; /* '만들어 나갑니다'와의 간격 */
+    font-size: 14px;
+    font-weight: 700;
+    color: #111;
+    text-decoration: underline; /* 다운로드 링크임을 알기 쉽게 밑줄 */
+    transition: color 0.2s;
+}
+
+/* =========================================
+   Portfolio 하단 상세 카테고리
+========================================= */
+
+.has-dropdown {
+    position: relative;
+}
+
+.sub-nav {
+    display: none !important; /* 억지로라도 숨김 */
+    position: absolute;
+    top: 20px; 
+    left: -615px; /* 위치가 이상하면 이 숫자만 -100, -300으로 바꿔보세요 */
+    width: 800px; 
+    background: #;
+    padding: 20px 0;
+    z-index: 9999; /* 무조건 맨 위로 */
+    justify-content: center;
+    gap: 20px;
+}
+
+/* 마우스 올리면 강제로 보여줌 */
+.has-dropdown:hover .sub-nav {
+    display: flex !important;
+}
+
+.sub-nav li a {
+    font-size: 13px;
+    color: #888;
+    white-space: nowrap;
+}
+
+.sub-nav li a:hover {
+    color: #111;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   Contact 페이지 전용 스타일
+========================================= */
+
+/* 상단 2단 텍스트 레이아웃 */
+.contact-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 화면을 정확히 반(50:50)으로 나눔 */
+    gap: 40px;
+    margin-bottom: 60px;
+    padding-top: 20px;
+}
+
+/* 왼쪽 회사 정보 스타일 */
+.contact-left h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 3px; /* 💡 오른쪽 글자의 투명한 줄간격 여백만큼 제목을 살짝 아래로 내립니다 */
+    margin-bottom: 12px;
+    color: #111;
+}
+
+.contact-left p {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 4px;
+}
+
+.contact-left .contact-details {
+    margin-top: 15px;
+    color: #111;
+}
+
+.contact-divider {
+    margin: 0 8px;
+    color: #ccc;
+    font-size: 11px;
+}
+
+/* 오른쪽 안내 문구 스타일 */
+.contact-right p {
+    font-size: 15px;
+    color: #111;
+    line-height: 1.8;
+}
+
+.contact-right .highlight-email {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111;
+    margin-top: 20px;
+}
+
+/* 하단 지도 영역 스타일 */
+.contact-map {
+    width: 100%;
+    border-top: 1px solid #111; /* 상단 검은색 구분선 */
+    padding-top: 40px;          /* 선과 지도 사이 여백 */
+    margin-bottom: 80px;        /* 푸터와의 여백 */
+}
+
+/* 카카오맵 자체 박스 디자인 */
+.root_daum_roughmap {
+    border: 1px solid #ddd;     /* 지도 테두리를 연한 회색으로 깔끔하게 */
+    margin-bottom: 0;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 450px;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-size: 16px;
+    border-bottom: 1px solid #eee; /* 아래쪽 연한 선 */
+    margin-bottom: 15px;
+}
+
+.map-caption {
+    font-size: 12px;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 100px;
+}
+
+
+/* =========================================
+   지도 2개 레이아웃 디자인
+========================================= */
+
+/* 각 지도 덩어리(섹션) 사이의 간격 띄우기 */
+.map-section {
+    margin-bottom: 70px; /* 위 지도와 아래 지도를 시원하게 띄움 */
+}
+
+/* 지도 제목 디자인 ([사무실], [인쇄소]) */
+.map-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 15px; /* 제목과 지도 사이의 간격 */
+}
+
+/* 임시 이미지용 가로 꽉 채우기 */
+.full-width-map {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid #ddd;
+margin-bottom: 15px; /* 💡 지도 아래쪽에 15px 여백을 주어 글자와 시원하게 띄웁니다 */
+}
+
+/* =========================================
+   More 버튼 작동을 위한 숨김 클래스
+========================================= */
+.hidden-item {
+    display: none !important; /* 처음에는 화면에서 완전히 숨깁니다 */
+}
+
+
+
+/* =========================================
+   메인 화면 자동 슬라이더(썸네일)
+========================================= */
+.main-slider {
+    width: 100%;
+    max-width: 1200px; /* 🚨 핵심: 무한정 늘어나는 배너를 포트폴리오와 똑같은 크기로 칼고정! */
+    height: 450px; 
+    margin-top: 176px; 
+    margin-left: auto; /* 🚨 화면 한가운데로 완벽하게 중앙 정렬 */
+    margin-right: auto; 
+    position: relative;
+    overflow: hidden;
+    background-color: #c32621;
+    border-bottom: 1px solid #eee;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0; /* 처음엔 투명하게 숨김 */
+    transition: opacity 1.2s ease-in-out; /* 1.2초 동안 아주 부드럽게 나타남 */
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1; /* active 클래스가 붙으면 화면에 나타남 */
+    z-index: 2;
+}
+
+
+/* 💡 슬라이더 바로 다음에 오는 박스만 위로 땡겨줍니다. 
+   (이렇게 해야 어바웃/컨택트 페이지가 헤더에 가려지지 않습니다!) */
+.main-slider + .content-container {
+    margin-top: 80px !important; 
+}
+
+
+/* =========================================
+   슬라이더 좌우 화살표 버튼 디자인
+========================================= */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.2); /* 평소엔 아주 연한 반투명 검은색 */
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* 동그란 버튼 모양 */
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10; /* 사진보다 무조건 위에 오도록 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.slider-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* 마우스 올리면 진해짐 */
+}
+
+.prev-btn { left: 30px; } /* 왼쪽 화살표 위치 */
+.next-btn { right: 30px; } /* 오른쪽 화살표 위치 */
+
+
+/* =========================================
+   📱 모바일 버전을 위한 마법의 코드 (반응형 웹)
+   화면 가로폭이 768px(스마트폰/태블릿) 이하일 때만 작동합니다!
+========================================= */
+@media screen and (max-width: 768px) {
+    
+    /* 1. 상단 로고와 메뉴바 (메뉴 가로 한 줄 강제 고정) */
+    .header-inner {
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+    }
+    .main-nav ul {
+        display: flex;
+        flex-direction: row !important; /* 💡 가로 배열 강제 */
+        flex-wrap: nowrap !important; /* 💡 절대 줄바꿈 금지 */
+        justify-content: center;
+        gap: 20px; /* 메뉴 사이 간격 */
+    }
+    .main-nav a {
+        font-size: 14.5px; /* 글자 크기 살짝 축소 */
+    }
+
+   /* 2. 모바일에 맞춰 메인 슬라이더 짤림 방지 및 높이 축소 */
+    .main-slider {
+        margin-top: 200px;
+        height: 160px !important; 
+    }
+    .slide {
+        background-size: 100% auto !important; 
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-color: #c32621 !important; /* 💡 모바일 배너 빈 공간도 붉은색으로 완벽하게 채움! */
+    }
+
+    /* 3. 슬라이더 화살표 크기 축소 */
+    .slider-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+
+
+    /* 4. 모바일 하위 카테고리(서브메뉴) 아예 안 보이게 삭제! */
+    .has-dropdown {
+        width: 100%; 
+    }
+    .sub-nav {
+        display: none !important; /* 무조건 숨김 */
+    }
+    .has-dropdown:hover .sub-nav,
+    .has-dropdown:active .sub-nav {
+        display: none !important; /* 터치해도 절대 안 나타남! */
+    }
+
+
+    /* 5. 서브 페이지(어바웃, 컨택트)는 헤더에 가려지지 않게 여백 넉넉히! */
+    .content-container {
+        margin-top: 260px; 
+        padding: 0 15px;
+    }
+
+    /* 6. 슬라이더가 있는 메인 페이지만 여백을 바짝 줄여줌! */
+    .main-slider + .content-container {
+        margin-top: 40px !important; 
+    }
+
+    /* 7. 메인 화면 2칸으로 줄이기 */
+    .portfolio-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px 10px; 
+    }
+
+   /* 8. 썸네일 강제 배경색 제거 & 원본 이미지 사이즈 그대로! */
+    .portfolio-item {
+        text-align: center; 
+    }
+    
+    .item-image-placeholder {
+        aspect-ratio: auto !important; 
+        height: auto !important; 
+        margin-bottom: 8px !important; 
+        background-color: #edefee !important; /* 💡 모바일 목업 박스도 완벽한 쿨그레이로 칠함! */
+    }
+    
+    .portfolio-image {
+        width: 100%;
+        height: auto !important; /* 원본 이미지 높이 그대로! */
+        object-fit: contain !important; 
+    }
+
+    /* 💡 제목 무조건 2줄 높이 고정 (칼정렬의 핵심) */
+    .item-title {
+        font-size: 13.5px; 
+        word-break: keep-all; 
+        margin-top: 8px !important; 
+        margin-bottom: 2px !important; 
+        
+        /* 마법의 2줄 고정 코드 */
+        line-height: 1.4;
+        height: 2.8em !important; /* 무조건 2줄 공간 차지 */
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* 3줄 넘어가면 '...' 처리 */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .item-tags {
+        font-size: 11px; 
+        margin-top: 0 !important;
+    }
+
+    /* 9. About, Contact 양옆 배치를 위아래로 */
+    .about-intro, .contact-info {
+        grid-template-columns: 1fr; 
+        gap: 30px;
+    }
+    .partner-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
+    /* 10. 푸터 가운데 정렬 */
+    .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    /* 11. 상세페이지 제목 가림 방지 */
+    .detail-container {
+        margin-top: 260px; 
+    }
+    .detail-title-area h2 {
+        font-size: 18px; 
+        word-break: keep-all; 
+        padding: 0 15px; 
+        line-height: 1.4;
+    }
+    .detail-title-area p {
+        font-size: 12px; 
+        word-break: keep-all;
+        padding: 0 15px;
+    }
+}
+
+/* =========================================
+   🚨 PC 화면 썸네일 찌그러짐/크기 변화 완벽 차단
+========================================= */
+@media screen and (min-width: 769px) {
+    body { 
+        min-width: 1200px !important; /* 창을 줄여도 1200px 이하로 절대 안 줄어듦! */
+    }
+    .content-container {
+        width: 1200px !important; 
+        max-width: 1200px !important;
+        padding: 0 !important; 
+    }
+}
