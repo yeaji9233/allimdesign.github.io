@@ -651,75 +651,92 @@ margin-bottom: 15px; /* 💡 지도 아래쪽에 15px 여백을 주어 글자와
         gap: 15px;
         flex-wrap: wrap; 
         justify-content: center;
-    } /* 💡 잃어버렸던 닫는 괄호 복구 완료! */
+    }
 
-    /* 💡 모바일에 맞춰 메인 슬라이더 높이 축소 */
+    /* 2. 모바일에 맞춰 메인 슬라이더 높이 축소 */
     .main-slider { 
         margin-top: 200px; 
         height: 250px; 
     }
 
-/* 💡 1&2. 모바일 썸네일 잘림 방지 & 이미지-글자 간격 밀착 */
-    .item-image-placeholder {
-        aspect-ratio: auto !important; /* 강제로 네모나게 자르던 비율 해제 */
-        height: auto !important; /* 이미지 원본 높이 그대로 보여주기 */
-        margin-bottom: 5px !important; /* 💡 사진과 제목 사이 간격을 바짝 줄임 (숫자 조절 가능) */
-        background-color: transparent; /* 회색 빈 배경 제거 */
+    /* 3. 슬라이더 화살표 크기 축소 (괄호 안으로 안전하게 들어왔습니다!) */
+    .slider-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
     }
-    .portfolio-image {
-        object-fit: contain !important; /* 이미지가 잘리지 않고 원본 비율대로 쏙 들어가게 함 */
-        height: auto !important;
-    }
-    .item-title {
-        margin-top: 0 !important; /* 글자 위쪽 간격도 없애서 바짝 붙임 */
-        font-size: 13.5px;
-        min-height: 38px;
-        line-height: 1.4;
-    }
-    
-    /* 💡 3. 모바일 하위 카테고리(서브메뉴) 겹침 해결 */
-    /* (주의: 기존에 있던 '5. 드롭다운 숨기기 .sub-nav { display: none; }' 코드가 있다면 지우고 이 코드를 넣으세요!) */
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+
+    /* 4. 모바일 하위 카테고리(서브메뉴) 겹침 완벽 해결 */
     .has-dropdown {
-        width: 100%; /* 포트폴리오 메뉴가 전체 가로를 차지하게 함 */
+        width: 100%; 
     }
     .sub-nav {
-        display: none; /* 평소엔 숨김 */
-        position: static !important; /* 💡 공중에 떠서 사진을 가리던 속성 해제 (아래로 자연스럽게 밀어냄) */
-        width: 100% !important; /* PC버전의 800px 크기를 모바일 화면 폭에 맞춤 */
+        display: none; 
+        position: static !important; /* 공중에 뜬 속성 해제 */
+        width: 100% !important; 
         margin-left: 0 !important;
         left: 0 !important;
         top: 0 !important;
-        flex-wrap: wrap !important; /* 하위 메뉴가 많으면 자연스럽게 줄바꿈 */
+        flex-wrap: wrap !important; 
         justify-content: center !important;
-        padding: 15px 0 0 0 !important; /* 하위 메뉴 위쪽 여백 */
-        gap: 15px 20px !important; /* 하위 메뉴들 사이의 간격 */
+        padding: 15px 0 0 0 !important; 
+        gap: 15px 20px !important; 
     }
     .has-dropdown:hover .sub-nav,
     .has-dropdown:active .sub-nav {
-        display: flex !important; /* 포트폴리오를 터치하면 밀어내며 나타남 */
+        display: flex !important; /* 터치 시 자연스럽게 밀어내며 등장 */
     }
     .sub-nav li a {
-        font-size: 14px; /* 모바일에서 터치하기 쉽게 글자 크기 살짝 키움 */
+        font-size: 14px; 
         padding: 5px;
     }
 
-    /* 2-1. 서브 페이지(어바웃, 컨택트)는 하얀 헤더에 가려지지 않게 여백 넉넉히! */
+    /* 5. 서브 페이지(어바웃, 컨택트)는 헤더에 가려지지 않게 여백 넉넉히! */
     .content-container {
         margin-top: 260px; 
         padding: 0 15px;
     }
 
-    /* 2-2. 슬라이더가 있는 메인 페이지만 여백을 바짝 줄여줌! */
+    /* 6. 슬라이더가 있는 메인 페이지만 여백을 바짝 줄여줌! */
     .main-slider + .content-container {
         margin-top: 40px !important; 
     }
 
+    /* 7. 메인 화면 2칸으로 줄이기 */
     .portfolio-grid { 
         grid-template-columns: repeat(2, 1fr); 
         gap: 15px 10px; 
     }
 
-    /* 3. About, Contact 양옆 배치를 위아래로 */
+    /* 8. 썸네일 잘림 방지 & 이미지-글자 간격 완벽 밀착 */
+    .portfolio-item {
+        text-align: center; 
+    }
+    .item-image-placeholder {
+        aspect-ratio: auto !important; 
+        height: auto !important; 
+        margin-bottom: 5px !important; /* 사진과 제목 사이 간격 바짝 줄임 */
+        background-color: transparent; 
+    }
+    .portfolio-image {
+        object-fit: contain !important; /* 짤림 방지 */
+        height: auto !important;
+    }
+    .item-title {
+        font-size: 13.5px; 
+        word-break: keep-all; 
+        margin-top: 0 !important; /* 제목 위쪽 간격 완전히 없앰 */
+        min-height: 38px;
+        line-height: 1.4;
+    }
+    .item-tags {
+        font-size: 11px; 
+        margin-top: 0;
+    }
+
+    /* 9. About, Contact 양옆 배치를 위아래로 */
     .about-intro, .contact-info {
         grid-template-columns: 1fr; 
         gap: 30px;
@@ -728,35 +745,17 @@ margin-bottom: 15px; /* 💡 지도 아래쪽에 15px 여백을 주어 글자와
         grid-template-columns: repeat(2, 1fr); 
     }
 
-    /* 4. 푸터 가운데 정렬 */
+    /* 10. 푸터 가운데 정렬 */
     .footer-inner {
         flex-direction: column;
         align-items: center;
         text-align: center;
         gap: 20px;
     }
-    
-    /* 5. 드롭다운 숨기기 */
-    .sub-nav {
-        display: none !important;
-    }
 
-    /* 6. 메인 포트폴리오 글자 정렬 */
-    .portfolio-item {
-        text-align: center; 
-    }
-    .item-title {
-        font-size: 13.5px; 
-        word-break: keep-all; 
-        margin-top: 5px; 
-    }
-    .item-tags {
-        font-size: 11px; 
-    }
-
-    /* 7. 상세페이지 제목이 하얀 헤더에 가려지는 현상 해결 */
+    /* 11. 상세페이지 제목 가림 방지 */
     .detail-container {
-        margin-top: 260px; /* 💡 상세페이지는 위에 슬라이더가 없으므로 260px 유지 */
+        margin-top: 260px; 
     }
     .detail-title-area h2 {
         font-size: 18px; 
@@ -770,12 +769,3 @@ margin-bottom: 15px; /* 💡 지도 아래쪽에 15px 여백을 주어 글자와
         padding: 0 15px;
     }
 }
-
-	/*8. 모바일용 슬라이더 화살표 크기 축소 */
-    .slider-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 14px;
-    }
-    .prev-btn { left: 10px; }
-    .next-btn { right: 10px; }
