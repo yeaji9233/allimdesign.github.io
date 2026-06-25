@@ -713,16 +713,22 @@ margin-bottom: 15px; /* 💡 지도 아래쪽에 15px 여백을 주어 글자와
         gap: 15px 10px; 
     }
 
-   /* 8. 썸네일 강제 배경색 제거 & 원본 이미지 사이즈 그대로! */
+   /* 8. PC 화면과 똑같은 비율로 썸네일 시원하게 꽉 채우기! */
     .portfolio-item {
         text-align: center; 
     }
     
     .item-image-placeholder {
-        aspect-ratio: auto !important; 
-        height: auto !important; 
+        aspect-ratio: 1 / 1.1 !important; /* 💡 PC와 똑같은 1:1.1 비율 고정! */
+        height: auto; 
         margin-bottom: 8px !important; 
-        background-color: #edefee !important; /* 💡 모바일 목업 박스도 완벽한 쿨그레이로 칠함! */
+        background-color: #edefee !important; 
+    }
+    
+    .portfolio-image {
+        width: 100%;
+        height: 100% !important; /* 💡 박스 높이에 100% 꽉 맞춤! */
+        object-fit: cover !important; /* 🚨 쪼그라들게 만들던 범인(contain)을 삭제하고, PC와 동일하게 빈틈없이 꽉 채우는(cover) 마법 적용! */
     }
     
     .portfolio-image {
